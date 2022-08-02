@@ -6,6 +6,7 @@ var logger = require('morgan');
 require("./models/connection");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var guidesRouter = require('./routes/guide');
 const cors = require('cors')
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'reactapp/build')));
 app.use(cors())
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/guide', guidesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
