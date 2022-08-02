@@ -55,7 +55,7 @@ router.post("/register", async function (req, res, next) {
     }
   }
 
-  res.json({ result,  saveUser, error, userToken });
+  res.json({ result, saveUser, error, userToken });
 });
 
 router.post("/sign-in", async function (req, res, next) {
@@ -86,5 +86,44 @@ router.post("/sign-in", async function (req, res, next) {
   }
 
   res.json({ result, error, userToken });
+});
+
+router.post("/setTypeInvestor", async function (req, res, next) {
+  var result = false;
+  var error = [];
+  if (req.body.userToken == "") {
+    error.push("utilisateur non identifié");
+  }
+
+  if (error.length == 0) {
+    await userModel.updateOne(
+      { userToken: req.body.userToken },
+      { typeInvestor: req.body.typeInvestor }
+    );
+  }
+  res.json({ result, error });
+});
+
+router.get("/getTypeInvestor", async function (req, res, next) {
+  var result = false;
+  var error = [];
+  var user = null;
+  var typeInvestor = null;
+  if (req.body.userToken == "") {
+    error.push("utilisateur non identifié");
+  }
+
+  if (error.length == 0) {
+    user = await userModel.findOne({
+      userToken: req.body.userToken,
+    });
+    if (user) {
+      typeInvestor = user.typeInvestor;
+    } else {
+      error.push("utilisateur inconnu");
+    }
+  }
+
+  res.json({ result, error, typeInvestor });
 });
 module.exports = router;
