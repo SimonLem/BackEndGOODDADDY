@@ -40,3 +40,5 @@ router.post("/getGuide", async function (req, res, next) {
     
   res.json({ guides });
 });
+
+module.exports = router
