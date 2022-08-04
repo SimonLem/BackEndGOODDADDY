@@ -96,7 +96,7 @@ router.post("/setTypeInvestor", async function (req, res, next) {
   }
 
   if (error.length == 0) {
-    await userModel.updateOne(
+   result = await userModel.updateOne(
       { userToken: req.body.userToken },
       { typeInvestor: req.body.typeInvestor }
     );
@@ -109,16 +109,18 @@ router.get("/getTypeInvestor", async function (req, res, next) {
   var error = [];
   var user = null;
   var typeInvestor = null;
-  if (req.body.userToken == "") {
+  if (req.query.userToken == "") {
     error.push("utilisateur non identifié");
   }
 
   if (error.length == 0) {
     user = await userModel.findOne({
-      userToken: req.body.userToken,
+      userToken: req.query.userToken,
     });
     if (user) {
+      console.log(user.typeInvestor)
       typeInvestor = user.typeInvestor;
+      console.log(typeInvestor)
     } else {
       error.push("utilisateur inconnu");
     }
