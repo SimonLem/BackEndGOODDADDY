@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var investmentSchema = mongoose.Schema({
+  asset: String,
   amountPaid: Number,
   amoutOfTokens: Number,
   frequency: String,
