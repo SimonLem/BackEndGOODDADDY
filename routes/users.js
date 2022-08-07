@@ -51,7 +51,7 @@ router.post("/register", async function (req, res, next) {
 
     if (saveUser) {
       result = true;
-      token = saveUser.userToken;
+      userToken = saveUser.userToken;
     }
   }
 
