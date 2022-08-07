@@ -23,6 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'reactapp/build')));
 app.use(cors())
 app.use('/', indexRouter);
+
+// Import des models
 app.use('/users', usersRouter);
 app.use('/guide', guidesRouter);
 app.use('/investment', investmentRouter);

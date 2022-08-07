@@ -1,4 +1,7 @@
 var mongoose = require("mongoose");
+
+// Définition du schéma pour la collection  Guides
+// LES DONNEES VONT RESSEMBLER A CA
 var guideSchema = mongoose.Schema({
   title: String,
   content: String,
@@ -6,4 +9,5 @@ var guideSchema = mongoose.Schema({
   dateRelease: Date
 });
 
+// EXPORT DU MODEL POUR TRAVAILLER AVEC LA BDD
 module.exports = mongoose.model("guide", guideSchema);
