@@ -3,42 +3,76 @@ var router = express.Router();
 
 var userModel = require("../models/user");
 
-router.post("/setGuide", async function (req, res, next) {
+router.post("/addOperation", async function (req, res, next) {
 
     var error = [];
     var result = false;
 
     if (
         req.body.userToken == "" ||
-        req.body.content == "" ||
-        req.body.author == "" ||
-        req.body.dateRelease == ""
+        req.body.date == "" ||
+        req.body.typeOperation == "" ||
+        req.body.amountOfToken == "" ||
+        req.body.amountPaid == ""
       ) {
         error.push("champs vides");
       }
 
-    var newGuide = new guideModel({
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author,
-        dateRelease: req.body.date
-      });
-
-    saveGuide = await newGuide.save();
-
-    if (saveUser) {
-        result = true;
-        token = saveUser.userToken;
-      }
+      result = await userModel.updateOne(
+        { userToken: req.body.userToken },
+        {
+          $push: {operations: {
+            date: req.body.date,
+            typeOperation: req.body.typeOperation,
+            amountOfToken: req.body.amountOfToken,
+            amountPaid: req.body.amountPaid
+          }}
+        });
 
   res.json({ result, error });
 });
 
-router.post("/getGuide", async function (req, res, next) {
+router.get("/getOperation", async function (req, res, next) {
 
-    var guides = await guideModel.find();
+  var error = [];
+
+  const user = await userModel.findOne({
+    userToken: req.query.userToken,
+  });
+
+  if (user != null) {
+    if (user.operations != []) {
+      var operations = user.operations;
+    } else {
+      error.push("utilisateur sans operations");
+    }
+  } else {
+    error.push("utilisateur inconnu");
+  }
+
     
-  res.json({ guides });
+  res.json({ operations, error });
 });
 
+router.post("/deleteOperation", async function (req, res, next) {
+
+  const user = await userModel.findOne({
+    userToken: req.body.userToken,
+  });
+
+  if (user != null) {
+    if (user.operations != []) {
+      var result = await userModel.updateOne({},
+        {$pull:{operations: {_id: req.body.id}}},
+        {multi: true})
+    } else {
+      error.push("utilisateur sans operations");
+    }
+  } else {
+    error.push("utilisateur inconnu");
+  }
+
+    
+  res.json({ result });
+});
 module.exports = router

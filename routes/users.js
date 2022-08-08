@@ -128,4 +128,38 @@ router.get("/getTypeInvestor", async function (req, res, next) {
 
   res.json({ result, error, typeInvestor });
 });
+
+router.post("/test", async function (req, res, next) {
+
+    result = await userModel.updateOne(
+      { userToken: "SHGO_60RKpZGYkJ_tlE8nSe9aDa_Sevb" },
+      {
+        walletHistory: [{
+          date: "August 02, 2022 23:15:00",
+          amountBTC: 1
+        },{
+          date: "August 03, 2022 23:15:00",
+          amountBTC: 2
+        },{
+          date: "August 04, 2022 23:15:00",
+          amountBTC: 3
+        },{
+          date: "August 05, 2022 23:15:00",
+          amountBTC: 4
+        },{
+          date: "August 06, 2022 23:15:00",
+          amountBTC: 5
+        },{
+          date: "August 07, 2022 23:15:00",
+          amountBTC: 6
+        },{
+          date: "August 08, 2022 23:15:00",
+          amountBTC: 10
+        }]
+      }
+    );
+  
+  res.json({ result });
+});
+
 module.exports = router;

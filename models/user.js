@@ -22,7 +22,7 @@ var walletHistorySchema = mongoose.Schema({
 var operationSchema = mongoose.Schema({
   date: Date, // Date of operation
   typeOperation: String, // Buy or Sell
-  amountOfTokens: Number,
+  amountOfToken: Number,
   amountPaid: Number,
 });
 
