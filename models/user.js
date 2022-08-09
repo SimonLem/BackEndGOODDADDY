@@ -24,6 +24,7 @@ var operationSchema = mongoose.Schema({
   typeOperation: String, // Buy or Sell
   amountOfToken: Number,
   amountPaid: Number,
+  asset: String
 });
 
 // definition du Schema de la collection de documents users

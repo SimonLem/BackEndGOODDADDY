@@ -15,8 +15,7 @@ router.post("/addStrategy", async function (req, res, next) {
     req.body.userToken == "" ||
     req.body.amountPaid == "" ||
     req.body.frequency == "" ||
-    req.body.asset == "" ||
-    req.body.frequency == ""
+    req.body.asset == "" 
   ) {
     error.push("data manquante (userToken, amountPaid ou frequency)");
   }
@@ -24,12 +23,15 @@ router.post("/addStrategy", async function (req, res, next) {
     result = await userModel.updateOne(
       { userToken: req.body.userToken },
       {
-        investment: {
-          asset: req.body.asset,
-          amountPaid: req.body.amountPaid,
-          frequency: req.body.frequency,
+        $push: {
+          investment: {
+            asset: req.body.asset,
+            amountPaid: req.body.amountPaid,
+            frequency: req.body.frequency,
+          },
         },
-      }
+      },
+      { multi: true }
     );
   } else {
     error.push("utilisateur inconnu");

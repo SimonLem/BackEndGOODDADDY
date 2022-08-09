@@ -26,6 +26,7 @@ router.post("/setGuide", async function (req, res, next) {
 
     saveGuide = await newGuide.save();
 
+
   res.json({ result, error });
 });
 
