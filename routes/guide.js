@@ -26,16 +26,11 @@ router.post("/setGuide", async function (req, res, next) {
 
     saveGuide = await newGuide.save();
 
-    if (saveUser) {
-        result = true;
-        token = saveUser.userToken;
-      }
 
   res.json({ result, error });
 });
 
-// Route GET pour récupérer la liste des guides sous forme de tableau
-router.post("/getGuide", async function (req, res, next) {
+router.get("/getGuide", async function (req, res, next) {
 
     var guides = await guideModel.find();
     
