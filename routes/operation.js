@@ -51,7 +51,7 @@ router.get("/getOperation", async function (req, res, next) {
   }
 
     
-  res.json({ operations, error });
+  res.json({ error, operations });
 });
 
 router.post("/deleteOperation", async function (req, res, next) {
