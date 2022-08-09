@@ -26,10 +26,6 @@ router.post("/setGuide", async function (req, res, next) {
 
     saveGuide = await newGuide.save();
 
-    if (saveUser) {
-        result = true;
-        token = saveUser.userToken;
-      }
 
   res.json({ result, error });
 });
