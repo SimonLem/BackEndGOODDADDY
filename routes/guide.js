@@ -34,6 +34,7 @@ router.post("/setGuide", async function (req, res, next) {
   res.json({ result, error });
 });
 
+// Route GET pour récupérer la liste des guides sous forme de tableau
 router.post("/getGuide", async function (req, res, next) {
 
     var guides = await guideModel.find();

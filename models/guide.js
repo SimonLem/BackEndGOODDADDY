@@ -6,7 +6,8 @@ var guideSchema = mongoose.Schema({
   title: String,
   content: String,
   author: String,
-  dateRelease: Date
+  dateRelease: Date,
+  image: String
 });
 
 // EXPORT DU MODEL POUR TRAVAILLER AVEC LA BDD
