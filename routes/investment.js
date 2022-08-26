@@ -3,6 +3,8 @@ var router = express.Router();
 
 var userModel = require("../models/user");
 
+// Route pour ajouter une stratégie stratégie à un utilisateur
+
 router.post("/addStrategy", async function (req, res, next) {
   var error = [];
   var result = false;
@@ -39,6 +41,8 @@ router.post("/addStrategy", async function (req, res, next) {
 
   res.json({ result, error });
 });
+
+// Route pour récupérer une stratégie
 
 router.get("/getStrategy", async function (req, res, next) {
   var error = [];
