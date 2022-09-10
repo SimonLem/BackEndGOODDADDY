@@ -21,7 +21,7 @@ router.post("/addOperation", async function (req, res, next) {
   result = await userModel.updateOne(
     { userToken: req.body.userToken },
     {
-      $push: {
+      $push: { // rajoute élément(operation) à une liste.
         operations: {
           date: req.body.date,
           typeOperation: req.body.typeOperation,

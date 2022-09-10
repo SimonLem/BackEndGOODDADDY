@@ -12,12 +12,13 @@ var operationRouter = require('./routes/operation');
 const cors = require('cors')
 var app = express();
 
-// view engine setup
+// Default values
+// View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+// Méthode de la manière d'écrire des logs pour l'application
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json()); // JavascriptObjectNotation default for all routes
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'reactapp/build')));
